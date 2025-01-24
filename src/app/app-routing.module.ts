@@ -7,7 +7,9 @@ import { ReservationListComponent } from './reservation-list/reservation-list.co
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'list', component: ReservationListComponent},
-  { path: 'new', component: ReservationFormComponent}
+  { path: 'new', component: ReservationFormComponent},
+  { path: 'edit/:id', component: ReservationFormComponent},
+  { path: '**', redirectTo: ''}  //if the URL does not match any of the above routes, redirect to home page.
   
 ];
 
