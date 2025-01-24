@@ -53,8 +53,6 @@ export class ReservationFormComponent implements OnInit{
       this.reservationService.addReservation(reservation);
     }
 
-     
-
       //redirection
       this.router.navigate(['/list']);
 
