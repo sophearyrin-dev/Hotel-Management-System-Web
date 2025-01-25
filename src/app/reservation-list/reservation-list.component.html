@@ -1,18 +1,45 @@
 <app-home></app-home>
 
-<p>reservation-list works!</p>
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center text-primary fw-bold mb-4">Reservation List</h2>
 
-<div>
-  <ul *ngIf="reservations.length; else noReservation">
-    <li *ngFor="let r of reservations">
-      {{ r.checkInDate }} {{ r.checkOutDate }} {{ r.guestName }}
-      {{ r.guestEmail }} {{ r.roomNumber }}
-      <button (click)="onDeleteReservation(r.id)">Delete</button>
-      <button [routerLink]="['/edit', r.id]">Edit</button>
-    </li>
-  </ul>
+    <div *ngIf="reservations.length; else noReservation">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+          <thead class="table-primary">
+            <tr>
+              <th>Check-in Date</th>
+              <th>Check-out Date</th>
+              <th>Guest Name</th>
+              <th>Email</th>
+              <th>Room Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of reservations">
+              <td>{{ r.checkInDate }}</td>
+              <td>{{ r.checkOutDate }}</td>
+              <td>{{ r.guestName }}</td>
+              <td>{{ r.guestEmail }}</td>
+              <td>{{ r.roomNumber }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm me-2" (click)="onDeleteReservation(r.id)">
+                  <i class="bi bi-trash-fill"></i> Delete
+                </button>
+                <button class="btn btn-warning btn-sm" [routerLink]="['/edit', r.id]">
+                  <i class="bi bi-pencil-square"></i> Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noReservation>
+      <p class="text-center text-muted mt-3">No reservations found.</p>
+    </ng-template>
+  </div>
 </div>
-
-<ng-template #noReservation>
-  <p>No reservations found.</p>
-</ng-template>

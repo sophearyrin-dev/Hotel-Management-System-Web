@@ -1,5 +1,17 @@
-<div>
-  <h2>Welcome to the Hotel Reservation!</h2>
-  <button [routerLink]="['/new']">Create a new Reservatoin</button>
-  <button [routerLink]="['/list']">View All reservations</button>
+<div class="container text-center mt-5">
+  <h2 class="mb-4 text-primary fw-bold">Welcome to the Hotel Reservation!</h2>
+
+  <div class="d-flex justify-content-center gap-3">
+    <button 
+      class="btn btn-lg btn-success shadow-sm px-4"
+      [routerLink]="['/new']">
+      <i class="bi bi-plus-circle me-2"></i> Create a New Reservation
+    </button>
+
+    <button 
+      class="btn btn-lg btn-info shadow-sm px-4 text-white"
+      [routerLink]="['/list']">
+      <i class="bi bi-list-ul me-2"></i> View All Reservations
+    </button>
+  </div>
 </div>
