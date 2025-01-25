@@ -1,10 +1,14 @@
+<app-home></app-home>
+
 <p>reservation-list works!</p>
 
 <div>
   <ul *ngIf="reservations.length; else noReservation">
-    <li *ngFor="let r of reservations">{{r.checkInDate}} {{r.checkOutDate}} {{r.guestName}} {{r.guestEmail}} {{r.roomNumber}}
-    <button (click)="onDeleteReservation(r.id)">Delete</button>
-    <button [routerLink]="['/edit', r.id]">Edit</button>
+    <li *ngFor="let r of reservations">
+      {{ r.checkInDate }} {{ r.checkOutDate }} {{ r.guestName }}
+      {{ r.guestEmail }} {{ r.roomNumber }}
+      <button (click)="onDeleteReservation(r.id)">Delete</button>
+      <button [routerLink]="['/edit', r.id]">Edit</button>
     </li>
   </ul>
 </div>
