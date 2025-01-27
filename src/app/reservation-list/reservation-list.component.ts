@@ -15,7 +15,9 @@ export class ReservationListComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.reservations = this.reservationService.getReservations();
+    this.reservationService.getReservations().subscribe(eservations => {
+      this.reservations = this.reservations;
+    })
   }
 
   onDeleteReservation(id: string){
