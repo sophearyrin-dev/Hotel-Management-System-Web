@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
-import { log } from 'console';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -9,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ReservationService {
 
-  private apiUrl = "http://localhost:3000";
+  private apiUrl = "http://localhost:3001";
 
   private reservations: Reservation[] = [];
 
@@ -18,7 +17,7 @@ export class ReservationService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(this.apiUrl + "/reservations");
+    return this.http.get<Reservation[]>(this.apiUrl + '/reservations');
   }
 
   getReservation(id: string): Reservation | undefined{

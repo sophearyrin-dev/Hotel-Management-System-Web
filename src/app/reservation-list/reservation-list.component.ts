@@ -14,12 +14,24 @@ export class ReservationListComponent implements OnInit{
   constructor(private reservationService: ReservationService){
 
   }
-  ngOnInit(): void {
-    this.reservationService.getReservations().subscribe(eservations => {
-      this.reservations = this.reservations;
-    })
-  }
+  // ngOnInit(): void {
+  //   this.reservationService.getReservations().subscribe(reservations => {
+  //     this.reservations = reservations;
+  //   })
+  // }
 
+
+  ngOnInit(): void {
+    this.reservationService.getReservations().subscribe({
+      next: (reservations) => {
+        this.reservations = reservations; // Assign the fetched data to the component's `reservations` array.
+      },
+      error: (error) => {
+        console.error('Error fetching reservations:', error); // Log any error to the console.
+      },
+    });
+  }
+  
   onDeleteReservation(id: string){
     this.reservationService.deleteReservation(id);
   }
