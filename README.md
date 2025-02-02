@@ -22,6 +22,7 @@ Ensure you have the following installed on your machine:
 - [Angular CLI](https://angular.io/cli)
 - [Bootstrap](https://getbootstrap.com/)
 - [Bootstrap Icons](https://icons.getbootstrap.com/)
+- Mockoon API
 
 ### Installation
 
