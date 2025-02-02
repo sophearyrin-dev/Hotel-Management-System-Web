@@ -11,6 +11,11 @@ This project is an Angular-based Hotel Reservation System that allows users to c
 - Update existing reservations
 - Delete reservations
 - Responsive design with Bootstrap and Bootstrap Icons
+- Routing for navigation between components
+- Mock API using Mockoon for testing
+- Modular architecture with models and services
+- Form Validation
+- Data handling with Observables
 
 ## Getting Started
 
@@ -22,7 +27,7 @@ Ensure you have the following installed on your machine:
 - [Angular CLI](https://angular.io/cli)
 - [Bootstrap](https://getbootstrap.com/)
 - [Bootstrap Icons](https://icons.getbootstrap.com/)
-- Mockoon API
+- [Mockoon](https://mockoon.com/) for Mock API
 
 ### Installation
 
@@ -41,11 +46,15 @@ Ensure you have the following installed on your machine:
 
 ### Running the Application
 
-1. Start the Angular application:
+1. Start the Mock API using Mockoon:
+   - Open Mockoon and import the provided API configuration.
+   - Start the mock server.
+
+2. Start the Angular application:
    ```bash
    ng serve
    ```
-2. Open your browser and navigate to `http://localhost:4200`.
+3. Open your browser and navigate to `http://localhost:4200`.
 
 ## Usage
 
@@ -54,9 +63,17 @@ Upon launching the application, you will see the welcome screen:
 - **Create a New Reservation**: Click the "Create a New Reservation" button to add a new booking.
 - **View All Reservations**: Click the "View All Reservations" button to see the list of all bookings.
 
-## API Endpoints
+### Routing
 
-The application interacts with the following RESTful API endpoints:
+The application uses Angular's routing module to navigate between different views:
+- `/home` - Home page
+- `/reservations` - List of reservations
+- `/reservations/create` - Create a new reservation
+- `/reservations/edit/:id` - Edit an existing reservation
+
+### Mock API with Mockoon
+
+The application interacts with a mock API for development and testing. The mock API simulates the backend and provides the following endpoints:
 
 - `GET /reservations` - Retrieve all reservations
 - `GET /reservation/:id` - Retrieve a specific reservation by ID
@@ -64,10 +81,59 @@ The application interacts with the following RESTful API endpoints:
 - `PUT /reservation/:id` - Update an existing reservation
 - `DELETE /reservation/:id` - Delete a reservation
 
+### Models
+
+The application uses TypeScript models to define the structure of reservation data:
+```typescript
+export interface Reservation {
+  id: number;
+  guestName: string;
+  roomNumber: number;
+  checkInDate: string;
+  checkOutDate: string;
+}
+```
+
+### Services
+
+Services are used to handle API calls and data manipulation using Angular's HttpClient and Observables:
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Reservation } from './models/reservation.model';
+
+@Injectable({ providedIn: 'root' })
+export class ReservationService {
+  private apiUrl = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) {}
+
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`);
+  }
+
+  getReservation(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(`${this.apiUrl}/reservation/${id}`);
+  }
+
+  createReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(`${this.apiUrl}/reservation`, reservation);
+  }
+
+  updateReservation(id: number, reservation: Reservation): Observable<Reservation> {
+    return this.http.put<Reservation>(`${this.apiUrl}/reservation/${id}`, reservation);
+  }
+
+  deleteReservation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/reservation/${id}`);
+  }
+}
+```
+
 ## Video Demo
 
 https://github.com/user-attachments/assets/29d8ddd4-f56c-415e-8c24-aba020e90900
-
 
 ## Contributing
 
